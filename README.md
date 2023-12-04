@@ -7,3 +7,7 @@ Game Jam
 - B - wybranie czerwonej mocy,
 - X - wybranie niebieskiej mocy,
 - Y - wybranie żółtej mocy
+# Zrzuty ekranu
+![alt text](/screens/menu.png)
+![alt text](/screens/play.png)
+![alt text](/screens/map.png)
