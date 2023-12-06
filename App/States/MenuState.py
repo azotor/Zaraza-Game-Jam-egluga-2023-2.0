@@ -1,6 +1,7 @@
 from App.States.State import State
 from App.Cooldown import Cooldown
-from App.Events import pad
+from App.Controls import controls
+from App.Config import FONT_TITLE
 
 import pygame, sys
 
@@ -19,18 +20,18 @@ class MenuState( State ):
     def update( self, change ):
         self.cooldown.update()
         if not self.cooldown.run:
-            if pad[ 'axis' ][ 'l' ][ 'y' ] < -.3:
+            if controls.d_pad_y < 0 or controls.axis_l_y < -.15:
                 self.cooldown.start( 200 )
                 self.currentOption -= 1
                 if self.currentOption < 0:
                     self.currentOption = len( self.options ) - 1
-            elif pad[ 'axis' ][ 'l' ][ 'y' ] > .3:
+            elif controls.d_pad_y > 0 or controls.axis_l_y > .15:
                 self.cooldown.start( 200)
                 self.currentOption += 1
                 if self.currentOption >= len( self.options ):
                     self.currentOption = 0
         
-        if pad[ 'button' ][ 'a' ]:
+        if controls.confirm:
             match self.currentOption:
                 case 0:
                     change( 'play' )
@@ -41,8 +42,7 @@ class MenuState( State ):
                     sys.exit()
 
     def render( self ):
-        titleFont = pygame.font.SysFont( "Tahoma", 32 )
-        title = titleFont.render( "VirusDangeon", False, ( 172, 50, 50 ) )
+        title = FONT_TITLE.render( "VirusDungeon", False, ( 172, 50, 50 ) )
         titleRect = title.get_rect( midright = ( self.surf.get_width() - 45, self.surf.get_height() / 2 ) )
         self.surf.blit( title, titleRect )
 

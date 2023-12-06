@@ -1,7 +1,7 @@
 import pygame
 
 from App.Config import SCALE
-from App.Events import pad
+from App.Controls import controls
 
 class Player:
     def __init__( self ):
@@ -12,16 +12,16 @@ class Player:
         self.dir = pygame.math.Vector2()
 
     def update( self ):
-        if pad[ 'axis' ][ 'l' ][ 'x' ] < -.3:
+        if controls.d_pad_x < 0 or controls.axis_l_x < -.15:
             self.dir[ 0 ] = -1
-        elif pad[ 'axis' ][ 'l' ][ 'x' ] > .3:
+        elif controls.d_pad_x > 0 or controls.axis_l_x > .15:
             self.dir[ 0 ] = 1
         else:
             self.dir[ 0 ] = 0
             
-        if pad[ 'axis' ][ 'l' ][ 'y' ] < -.3:
+        if controls.d_pad_y < 0 or controls.axis_l_y < -.15:
             self.dir[ 1 ] = -1
-        elif pad[ 'axis' ][ 'l' ][ 'y' ] > .3:
+        elif controls.d_pad_y > 0 or controls.axis_l_y > .15:
             self.dir[ 1 ] = 1
         else:
             self.dir[ 1 ] = 0

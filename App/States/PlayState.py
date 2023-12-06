@@ -15,7 +15,7 @@ class PlayState( State ):
     def update( self, change ):
         self.dungeon.update()
         self.player.update()
-        self.hud.update( { 'heart' : 100, 'mana' : 100, 'a' : 1, 'b' : 0, 'x' : 1, 'y' : 0 } )
+        self.hud.update( { 'heart' : 100, 'mana' : 100, 'action1' : 1, 'action2' : 0, 'action3' : 1, 'action4' : 0 } )
 
     def render( self ):
         self.dungeon.renderRoom( ( 0, 0 ) )

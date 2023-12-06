@@ -1,13 +1,15 @@
 import pygame, sys
+
+pygame.init()
+
 from App.Events import Events, pad
-from App.Config import SCALE
+from App.Config import SCALE, TITLE
 from App.StatesManager import StatesManager
 
 class Game:
     def __init__( self ):
-        pygame.init()
         self.screen = pygame.display.set_mode( ( 32 * 11 * SCALE, 32 * 11 * SCALE ), pygame.DOUBLEBUF )
-        pygame.display.set_caption( "ZARAZA" )
+        pygame.display.set_caption( TITLE )
 
         self.events = Events()
 

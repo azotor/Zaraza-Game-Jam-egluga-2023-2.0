@@ -1,7 +1,8 @@
 from App.Room import Room
 from App.DungeonSprites import DungeonSprites
-from App.Events import pad
+from App.Controls import controls
 from App.Cooldown import Cooldown
+from App.Config import FONT_MAP
 
 import random, pygame
 
@@ -64,7 +65,6 @@ class Dungeon:
         if self.minimap:
             bound = self.getRoomsBound()
             size = 18
-            font = pygame.font.SysFont( 'Sans Serif', 32 )
             minisurf = pygame.Surface( ( int( ( bound[ 1 ] - bound[ 3 ] + 3 ) * size ), int( ( bound[ 2 ] - bound[ 0 ] + 3 ) * size ) ), pygame.DOUBLEBUF ).convert_alpha()
             minisurf.fill( ( 0, 0, 0, 200 ) )
             fill_color = pygame.Color( 69, 40, 60 )
@@ -84,7 +84,7 @@ class Dungeon:
                     pygame.draw.line( minisurf, fill_color, ( originX, originY + size / 2 - size / 6 ), ( originX, originY + size / 2 + size / 6 ), 1 )
                 if room.pos == player:
                     pygame.draw.circle( minisurf, ( 152, 229, 80 ), ( originX + size / 2, originY + size / 2 ), size / 6 )
-            text = font.render( "MAP", False, ( 255, 255, 255 ) )
+            text = FONT_MAP.render( "MAP", False, ( 255, 255, 255 ) )
             text_rect = text.get_rect( center = ( self.surf.get_width() / 2, ( self.surf.get_height() - minisurf.get_height() ) / 2 - size ) )
             self.surf.blit( text, text_rect )
             self.surf.blit( minisurf, ( ( self.surf.get_width() - minisurf.get_width() ) / 2, ( self.surf.get_height() - minisurf.get_height() ) / 2 ) )
@@ -129,6 +129,6 @@ class Dungeon:
         self.minimapCooldown.update()
 
     def toggleMiniMap( self ):
-        if pad[ 'button' ][ 'share' ] and not self.minimapCooldown.run:
+        if controls.map and not self.minimapCooldown.run:
             self.minimap = not self.minimap
             self.minimapCooldown.start( 200 )
